@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<!--根元素 -->
+<struts>
+	<constant name="struts.custom.i18n.resources" value="globalMessages"></constant>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<!--导入一个配置文件，通过这种方式可以将Struts2的Action按模块配置到多个配置文件中。 -->
+	<!-- 所有的Action配置都应该放在package下 ，name定义包名，extends定义继承包空间struts-default。 -->
+	<package name="wjn" namespace="/" extends="struts-default">
+		<action name="CounterAction"
+			class="cn.cslg.action.CounterAction" method="execute">
+			<result name="success">/counter.jsp</result>
+		</action>
+		<action name="IocAction" class="cn.cslg.action.IocAction">
+			<result name="success">success.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		<action name="LoginAction" class="cn.cslg.action.LoginAction"
+			method="login">
+			<result name="success">loginSuccess.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		<action name="registAction" class="cn.cslg.action.LoginAction"
+			method="regist">
+			<result name="success">regist_info.jsp</result>
+		</action>
+		<action name="RegisterAction" class="cn.cslg.action.RegisterAction">
+			<result name="success">MethodLogin.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		<action name="CheckAction" class="cn.cslg.action.CheckAction">
+			<result name="success">2-5-loginSuccess.jsp</result>
+			<result name="error">2-5-login.jsp</result>
+		</action>
+		<action name="register" class="cn.cslg.action.RegisterAction2">
+		<result name="input">2-6-register.jsp</result>
+		<result name="success">2-6-Success.jsp</result>
+		</action>
+		   <action name="upload" class="cn.cslg.action.UploadAction">
+            <param name="savePath">/save</param>
+            <result name="success">/fileUpSuccess.jsp</result>
+            <result name="error">/fileUp.jsp</result>
+        </action>
+         <action name="download" class="cn.cslg.action.DownloadAction">
+             <!--stream类型:直接向页面输出二进制数据 -->
+            <result name="success" type="stream">
+                <!-- 给stream结果视图注入参数:Content-Type -->
+                <param name="contentType">text/plain</param>
+                <param name="contentDisposition">attachment;fileName="${fileName}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+	</package>
+</struts>
